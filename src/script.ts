@@ -51,7 +51,7 @@ function preencherEstatísticas(transacoes: Transacao[]): void {
   preencherLista(data.status, "status");
 
   //dia com mais venda
-  const diaElement = document.querySelector("#dia span");
+  const diaElement = document.querySelector<HTMLElement>("#dia span");
   if (diaElement) {
     diaElement.innerText = `${data.melhorDia[0]}`;
   }
