@@ -46,7 +46,15 @@ function preencherEstatísticas(transacoes: Transacao[]): void {
       currency: "BRL",
     });
   }
-
+  //estatisticas pagamento e status
   preencherLista(data.pagamento, "pagamento");
   preencherLista(data.status, "status");
+
+  //dia com mais venda
+  const diaElement = document.querySelector("#dia span");
+  if (diaElement) {
+    diaElement.innerText = `${data.melhorDia[0]}`;
+  }
+
+  console.log(data);
 }
