@@ -1,4 +1,4 @@
-import Estatisticas from "./Estatísticas.js";
+import Estatisticas from "./Estatisticas.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
 
