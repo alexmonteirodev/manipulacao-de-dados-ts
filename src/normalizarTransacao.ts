@@ -21,19 +21,21 @@ declare global {
   }
 
   interface Transacao {
-    data: string;
+    data: Date;
     email: string;
     id: number;
     nome: string;
     status: TransacaoStatus;
-    moeda: string;
+    moeda: number | null;
     valor: number | null;
     pagamento: TransacaoPagamentos;
     novo: boolean;
   }
 }
 
-export default function normalizarTransacao(transacao: TransacaoAPI) {
+export default function normalizarTransacao(
+  transacao: TransacaoAPI
+): Transacao {
   return {
     data: stringToDate(transacao.Data),
     email: transacao.Email,
