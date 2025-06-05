@@ -1,6 +1,7 @@
 import Estatisticas from "./Estatisticas.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
+import preencherLista from "./preencherLista.js";
 
 async function handleData() {
   const data = await fetchData<TransacaoAPI[]>(
@@ -37,12 +38,15 @@ function preencherTabela(transacoes: Transacao[]): void {
 //estatísticas total
 function preencherEstatísticas(transacoes: Transacao[]): void {
   const data = new Estatisticas(transacoes);
-  const total = document.querySelector<HTMLElement>("#total span");
+  const totalElement = document.querySelector<HTMLElement>("#total span");
 
-  if (total) {
-    total.innerText = data.total.toLocaleString("pt-BR", {
+  if (totalElement) {
+    totalElement.innerText = data.total.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     });
   }
+
+  preencherLista(data.pagamento, "pagamento");
+  preencherLista(data.status, "status");
 }
