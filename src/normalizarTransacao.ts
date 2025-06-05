@@ -26,7 +26,7 @@ declare global {
     id: number;
     nome: string;
     status: TransacaoStatus;
-    moeda: number | null;
+    moeda: string;
     valor: number | null;
     pagamento: TransacaoPagamentos;
     novo: boolean;
@@ -42,8 +42,8 @@ export default function normalizarTransacao(
     id: transacao.ID,
     nome: transacao.Nome,
     status: transacao.Status,
-    moeda: moedaParaNumero(transacao["Valor (R$)"]),
-    valor: 0,
+    moeda: transacao["Valor (R$)"],
+    valor: moedaParaNumero(transacao["Valor (R$)"]),
     pagamento: transacao["Forma de Pagamento"],
     novo: Boolean(transacao["Cliente Novo"]),
   };

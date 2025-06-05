@@ -1,3 +1,4 @@
+import Estatisticas from "./Estatísticas.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
 
@@ -7,11 +8,13 @@ async function handleData() {
   );
   if (!data) return;
   const transacoes = data.map(normalizarTransacao);
-  console.log(transacoes);
+  // console.log(transacoes);
   preencherTabela(transacoes);
+  preencherEstatísticas(transacoes);
 }
 handleData();
 
+//preenche tabela
 function preencherTabela(transacoes: Transacao[]): void {
   // indicar void pq essa função não retorna NamedNodeMap, apenas para manipular o DOM e preencher coisa na tela
   const tabela = document.querySelector("#transacoes tbody");
@@ -29,4 +32,17 @@ function preencherTabela(transacoes: Transacao[]): void {
     </tr>
     `;
   });
+}
+
+//estatísticas total
+function preencherEstatísticas(transacoes: Transacao[]): void {
+  const data = new Estatisticas(transacoes);
+  const total = document.querySelector<HTMLElement>("#total span");
+
+  if (total) {
+    total.innerText = data.total.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  }
 }
